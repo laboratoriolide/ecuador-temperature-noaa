@@ -10,6 +10,7 @@ This repository contains code to download and process daily temperature data for
 
 R is used to process the `.nc` files and obtain daily temperature data, processing the geospatial information into a rectangular format, friendly with relational database systems. The processing algorithm is based on the work of [Quijano-Ruiz (2023)](https://github.com/aquijanoruiz/Weather_HealthPerception).
 
+
 ## Referencias / References
 
 Quijano-Ruiz, A. (2023). [Assessing the Reliability of Self-rated Health: The effects of Transient Weather Fluctuations on Perceived Health](https://github.com/aquijanoruiz/Weather_HealthPerception). [Working Paper].

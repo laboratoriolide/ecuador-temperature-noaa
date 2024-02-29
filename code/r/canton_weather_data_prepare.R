@@ -15,6 +15,7 @@ if (!require(janitor)) install.packages("janitor")
 if(!require(stringr)) install.packages("stringr")
 if(!require(tidyr)) install.packages("tidyr")
 if(!require(lubridate)) install.packages("lubridate")
+if(!require(readr)) install.packages("readr")
 
 # Load libraries
 
@@ -24,6 +25,7 @@ library(terra)
 library(janitor)
 library(haven)
 library(stringr)
+library(readr)
 library(tidyr)
 
 # Loading shapefile -----------------------------------------------------------
@@ -93,3 +95,22 @@ precipitation_files <- list.files("data/weather/raw/precip",full.names = T)
 min_temperature_data <- lapply(min_temperature_files, extract_weather_data)
 
 min_temperature_df <- bind_rows(min_temperature_data)
+
+max_temperature_data <- lapply(max_temperature_files, extract_weather_data)
+
+max_temperature_df <- bind_rows(max_temperature_data)
+
+precipitation_data <- lapply(precipitation_files, extract_weather_data)
+
+precipitation_df <- bind_rows(precipitation_data)
+
+# Exporting the data ------------------------------------------------------------
+
+# Export all data to different csv files
+
+write_csv(min_temperature_df, "data/weather/processed/min_temperature.csv")
+
+write_csv(max_temperature_df, "data/weather/processed/max_temperature.csv")
+
+write_csv(precipitation_df, "data/weather/processed/precipitation.csv")
+

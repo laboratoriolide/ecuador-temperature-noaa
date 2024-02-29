@@ -36,28 +36,36 @@ canton_ids <-
     clean_names() %>% 
     select(canton_id = dpa_canton)
 
-# Extracting daily canton max temperature --------------------------------------------------------------
+# Function to extract daily weather data ---------------------------------------
 
-canton_tmax_2018 <- 
-    rast("data/weather/raw/tempmax/tmax.2018.nc")  %>% 
-    rotate()
+# Create a function to extract daily weather data for any given NetCDF file
+# The argument is the path to the NetCDF file
 
-canton_ids <-
-    st_transform(canton_ids, crs(canton_tmax_2018))
+extract_min_temp_data <- function(x){
+    # Load the NetCDF file and reproject the SpatRaster to standard coordinates between -180 and 180 degrees
+    x <- rast(x) %>% rotate()
+    
+    # Reproject the canton shapefile to the same coordinate system as the NetCDF file
+    canton_ids <- 
+        st_transform(canton_ids, crs(x))
+    
+    # Mask the SpatRaster using the shapefile
+    x <- crop(x, canton_ids, mask = T)
 
-canton_tmax_2018 <-
-    crop(canton_tmax_2018, canton_ids, mask = T)
+    # Extract the time and layer dimensions from the SpatRaster
+    time <- time(x)
+    names <- names(x)
 
-names <- names(canton_tmax_2018)
-time <- time(canton_tmax_2018)
+    # Extract the weighted mean temperature for each canton
+    x <- extract(x, canton_ids, fun = mean, na.rm = T, weights = T, bind = T)
 
-canton_tmax_2018 <- extract(canton_tmax_2018, canton_ids, fun = mean, na.rm = T, weights = T, bind = T)
+    # Transform the SpatRaster to a tibble
 
-canton_tmax_2018 <- as_tibble(canton_tmax_2018)
+    x <- as_tibble(x)
+  
+    return(x)
+}
 
-names(canton_tmax_2018)[names(canton_tmax_2018) %in% names] <- as.character(as.Date(time))
+# Applying the function to the NetCDF files ------------------------------------
 
-# Compute an average temperature for each canton, for all days in 2018
-
-canton_tmax_2018$tmax_mean <- rowMeans(canton_tmax_2018[,2:ncol(canton_tmax_2018)])
-canton_tmax_2018 <- select(canton_tmax_2018, canton_id, tmax_mean)
+# 

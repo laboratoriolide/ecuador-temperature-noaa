@@ -18,6 +18,8 @@ if (!require(dplyr)) install.packages("dplyr")
 library(sf, warn.conflicts = F)
 library(terra, warn.conflicts = F)
 library(dplyr, warn.conflicts = F)
+library(rnaturalearth, warn.conflicts = T)
+library(rnaturalearthdata, warn.conflicts = T)
 
 # Load data -----------------------------------------------------------
 
@@ -45,19 +47,32 @@ canton_shp <-
 
 canton_shp <- st_transform(canton_shp, crs(tmax_2023))
 
-# Computation of averages  ---------------------------------------
+# Extract the world map from rnaturalearth
 
-tmax <- tmax_2023 %>% 
+world <- ne_countries(scale = "medium", returnclass = "sf")
+
+# Reproject the world map to match the raster's CRS
+
+world <- st_transform(world, crs(tmax_2023))
+
+# Computation of averages for Ecuador ---------------------------------------
+
+# Rotate the raster, then crop it to the canton shapefile and compute the mean
+
+mean_tmax_ecu <- 
+    tmax_2023 %>% 
     rotate() %>% 
     crop(canton_shp, mask = T) %>% 
     app(mean)
 
-tmin <- tmin_2023 %>%
+mean_tmin_ecu <- 
+    tmin_2023 %>%
     rotate() %>% 
     crop(canton_shp, mask = T) %>% 
     app(mean)
 
-precip <- precip_2023 %>%
+mean_precip_ecu <- 
+    precip_2023 %>%
     rotate() %>% 
     crop(canton_shp, mask = T) %>% 
     app(mean)
@@ -68,15 +83,31 @@ layout(matrix(c(1,1,2,2,0,3,3,0),nrow = 2, ncol = 4, byrow = TRUE))
 
 # Maximum temperature
 
-plot(tmax, main = "Average Maximum Temperature (°C)", axes = T, col = terrain.colors(100), legend = T)
+plot(mean_tmax_ecu, main = "Average Maximum Temperature (°C)", axes = T, col = terrain.colors(100), legend = T)
 plot(canton_shp$geometry, add = T)
 
 # Minimum temperature
 
-plot(tmin, main = "Average Minimum Temperature (°C)", axes = T, col = terrain.colors(100), legend = T)
+plot(mean_tmin_ecu, main = "Average Minimum Temperature (°C)", axes = T, col = terrain.colors(100), legend = T)
 plot(canton_shp$geometry, add = T)
 
 # Precipitation
 
-plot(precip, main = "Average Precipitation (mm)", axes = T, col = terrain.colors(100), legend = T)
+plot(mean_precip_ecu, main = "Average Precipitation (mm)", axes = T, col = terrain.colors(100), legend = T)
 plot(canton_shp$geometry, add = T)
+
+# Also can calculate mean values for the whole map (the world) and plot it
+
+mean_tmax_world <- 
+    tmax_2023 %>% 
+    rotate() %>%
+    crop(world, mask = T) %>%
+    app(mean)
+
+# Change the layout to plot the world map (only one plot in the layout)
+
+layout(matrix(1, nrow = 1, ncol = 1))
+
+plot(mean_tmax_world, main = "Average Maximum Temperature (°C)", axes = T, col = terrain.colors(100), legend = T)
+
+plot(world$geometry, add = T)

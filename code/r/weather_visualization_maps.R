@@ -12,6 +12,8 @@
 if (!require(sf)) install.packages("sf")
 if (!require(terra)) install.packages("terra")
 if (!require(dplyr)) install.packages("dplyr")
+if (!require(rnaturalearth)) install.packages("rnaturalearth")
+if (!require(rnaturalearthdata)) install.packages("rnaturalearthdata")
 
 # Load libraries
 

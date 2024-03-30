@@ -13,7 +13,7 @@ if (!require(dplyr)) install.packages("dplyr")
 
 library(dplyr)
 
-# Set a larger timeout options
+# Set a larger timeout option
 
 options(timeout = 300)
 

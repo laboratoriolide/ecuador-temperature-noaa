@@ -1,7 +1,7 @@
 # R Script: Canton weather data preparation
 # Laboratorio de Investigación para el Desarrollo del Ecuador 
 # Inputs: 1_weather_data_download.R, 2_shapefiles_download.R, 3_canton_weather_data_prepare.R
-# Outputs: @img/weather_maps/
+# Outputs: none
 # Description: This script visualizes weather data in maps for Ecuador. 
 
 # ========================== Data visualization ============================================================

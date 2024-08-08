@@ -9,8 +9,6 @@
 # As an example, we show how to compute average maximum, minimum and precipitation values for
 # cantons in Ecuador using raster data and shapefiles.
 
-# Examples using base R and ggplot2 are available. 
-
 # Preliminaries ----------------------------------------------------------------
 
 # Download and install required packages if not already installed

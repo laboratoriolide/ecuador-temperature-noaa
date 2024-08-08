@@ -1,7 +1,8 @@
 # R Script: Canton weather data preparation
 # Laboratorio de Investigación para el Desarrollo del Ecuador 
-
-# This script prepares daily weather data at the canton level for Ecuador.
+# Description: This script prepares daily weather data at the canton level for Ecuador.
+# Inputs: 1_weather_data_download.R, 2_shapefiles_download.R
+# Outputs: data/weather/processed/min_temperature.csv, data/weather/processed/max_temperature.csv, data/weather/processed/precipitation.csv
 
 # Preliminaries ----------------------------------------------------------------
 

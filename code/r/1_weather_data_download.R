@@ -1,7 +1,8 @@
 # R Script: Ecuador NOAA Data Download
 # Laboratorio de Investigación para el Desarrollo del Ecuador 
-
-# This script downloads NOAA data for Ecuador.
+# Description: This script downloads NOAA data for Ecuador.
+# Inputs: None
+# Outputs: NetCDF files with temperature and precipitation data @data/weather/raw
 
 # Preliminaries ----------------------------------------------------------------
 

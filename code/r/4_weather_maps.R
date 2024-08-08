@@ -1,9 +1,15 @@
 # R Script: Canton weather data preparation
 # Laboratorio de Investigación para el Desarrollo del Ecuador 
+# Inputs: 1_weather_data_download.R, 2_shapefiles_download.R, 3_canton_weather_data_prepare.R
+# Outputs: @img/weather_maps/
+# Description: This script visualizes weather data in maps for Ecuador. 
 
-# This script visualizes weather data in maps for Ecuador. 
+# ========================== Data visualization ============================================================
+
 # As an example, we show how to compute average maximum, minimum and precipitation values for
 # cantons in Ecuador using raster data and shapefiles.
+
+# Examples using base R and ggplot2 are available. 
 
 # Preliminaries ----------------------------------------------------------------
 
@@ -113,3 +119,7 @@ layout(matrix(1, nrow = 1, ncol = 1))
 plot(mean_tmax_world, main = "Average Maximum Temperature (°C)", axes = T, col = terrain.colors(100), legend = T)
 
 plot(world$geometry, add = T)
+
+# Export the plots
+
+dev.copy(png, "img/weather_maps/average_max_temp_ecu.png")

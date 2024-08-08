@@ -1,8 +1,9 @@
 # R Script: Ecuador Map Shapefiles Download
 # Laboratorio de Investigación para el Desarrollo del Ecuador 
-
-# This script downloads the map shapefiles for Ecuador.
+# Description: This script downloads the map shapefiles for Ecuador.
 # Source: INEC (https://www.ecuadorencifras.gob.ec/documentos/web-inec/Geografia_Estadistica/Micrositio_geoportal/index.html)
+# Inputs: None
+# Outputs: Shapefiles for Ecuador @data/shp/ecuador_shapefiles
 
 # Preliminaries ----------------------------------------------------------------
 

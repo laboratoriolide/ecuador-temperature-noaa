@@ -1,4 +1,4 @@
-# R Script: Canton weather data preparation
+# R Script: Weather map creation
 # Laboratorio de Investigación para el Desarrollo del Ecuador 
 # Inputs: 1_weather_data_download.R, 2_shapefiles_download.R, 3_canton_weather_data_prepare.R
 # Outputs: none
@@ -27,6 +27,9 @@ library(dplyr, warn.conflicts = F)
 library(rnaturalearth, warn.conflicts = T)
 library(rnaturalearthdata, warn.conflicts = T)
 
+# Create output directory for weather maps if it doesn't exist
+if (!dir.exists("img/weather_maps")) dir.create("img/weather_maps", recursive = TRUE)
+
 # Load data -----------------------------------------------------------
 
 # Maximum temperature 
@@ -47,7 +50,7 @@ canton_shp <-
     st_read("data/shp/ecuador_shapefiles/SHP/nxcantones.shp")  %>% 
     st_simplify(preserveTopology = T, dTolerance = 100) %>% 
     rename(prov_id = DPA_PROVIN) %>% 
-    filter(!prov_id %in% "20") # Filter out Galápagos Islands since there are no relevant data for these canton
+    filter(!prov_id %in% "20") # Filter out Galápagos Islands since there are no relevant data for these cantons
 
 # Reproject the canton shapefile to match the raster's CRS
 
@@ -91,16 +94,22 @@ layout(matrix(c(1,1,2,2,0,3,3,0),nrow = 2, ncol = 4, byrow = TRUE))
 
 plot(mean_tmax_ecu, main = "Average Maximum Temperature (°C)", axes = T, col = terrain.colors(100), legend = T)
 plot(canton_shp$geometry, add = T)
+dev.copy(png, "img/weather_maps/average_max_temp_ecu.png")
+dev.off()
 
 # Minimum temperature
 
 plot(mean_tmin_ecu, main = "Average Minimum Temperature (°C)", axes = T, col = terrain.colors(100), legend = T)
 plot(canton_shp$geometry, add = T)
+dev.copy(png, "img/weather_maps/average_min_temp_ecu.png")
+dev.off()
 
 # Precipitation
 
 plot(mean_precip_ecu, main = "Average Precipitation (mm)", axes = T, col = terrain.colors(100), legend = T)
 plot(canton_shp$geometry, add = T)
+dev.copy(png, "img/weather_maps/average_precip_ecu.png")
+dev.off()
 
 # Also can calculate mean values for the whole map (the world) and plot it
 
@@ -120,4 +129,5 @@ plot(world$geometry, add = T)
 
 # Export the plots
 
-dev.copy(png, "img/weather_maps/average_max_temp_ecu.png")
+dev.copy(png, "img/weather_maps/average_max_temp_world.png")
+dev.off()

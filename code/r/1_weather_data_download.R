@@ -66,7 +66,7 @@ min_temperature_urls <- c(
   "https://downloads.psl.noaa.gov//Datasets/cpc_global_temp/tmin.2008.nc"
 )
 
-## Precipation (rain) data -----------------------------------------------------
+## Precipitation (rain) data ---------------------------------------------------
 
 precip_urls <- c(
   "https://downloads.psl.noaa.gov//Datasets/cpc_global_precip/precip.2024.nc",

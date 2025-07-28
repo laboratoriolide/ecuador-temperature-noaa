@@ -129,5 +129,6 @@ plot(world$geometry, add = T)
 
 # Export the plots
 
-dev.copy(png, "img/weather_maps/average_max_temp_world.png")
+dev.copy(png, "img/weather_maps/average_max_temp_ecu.png")
 dev.off()
+

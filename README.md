@@ -1,6 +1,6 @@
 # Datos de Temperatura del Ecuador del NOAA
 
-Este repositorio contiene el código necesario para descargar y procesar los datos diarios de temperatura para Ecuador del Physical Sciences Laboratory del [National Oceanic and Atmospheric Administration (NOAA)](https://www.noaa.gov/), una agencia del gobierno de los Estados Unidos. Los datos sin procesar se pueden descargar en un formato NetCDF (`.nc`) [desde aquí](https://psl.noaa.gov/data/gridded/data.cpc.globaltemp.html). El código prepara datos diarios al nivel de cantones y parroquias del país.  
+Este repositorio contiene el código necesario para descargar y procesar los datos diarios de temperatura para Ecuador del Physical Sciences Laboratory del [National Oceanic and Atmospheric Administration (NOAA)](https://www.noaa.gov/), una agencia del gobierno de los Estados Unidos. Los datos sin procesar se pueden descargar en un formato NetCDF (`.nc`) [desde aquí](https://psl.noaa.gov/data/gridded/data.cpc.globaltemp.html). El código prepara datos diarios a nivel de cantón (segundo nivel administrativo por debajo de provincia).
 
 Se utiliza R para procesar los archivos `.nc` y obtener los datos de temperatura diaria, procesando la información geoespacial a un formato rectangular, amigable con sistemas de bases de datos relacionales. El algoritmo de procesamiento se basa en el trabajo de [Quijano-Ruiz (2023)](https://github.com/aquijanoruiz/Weather_HealthPerception).
 

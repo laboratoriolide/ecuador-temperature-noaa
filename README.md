@@ -20,13 +20,13 @@ R and RStudio are required to run the code. A stable internet connection is reco
 
 2. [Instrucciones / Instructions](#instrucciones--instructions)
 
-El producto final del código son tres archivos `.csv` con los datos de temperatura y precipitación diaria para Ecuador. El primer archivo contiene datos de temperatura máxima, el segundo datos de temperatura mínima y el tercero datos de precipitación. Los archivos contienen información a nivel de cantón. 
+El producto final del código son tres archivos `.csv` con los datos de temperatura y precipitación diaria para Ecuador. El primer archivo contiene datos de temperatura máxima, el segundo datos de temperatura mínima y el tercero datos de precipitación. Los archivos contienen información a nivel de cantón.
 
-El script de bash `ecuador-noaa.sh` ejecuta los tres primeros scripts de R en orden, pero actualmente no ejecuta `code/r/4_weather_maps.R`. Se recomienda ejecutar los scripts de R por separado para ahorrar tiempo en caso de errores o de tiempos de ejecución largos debido a la cantidad de datos del NOAA.
+El script de bash `ecuador-noaa.sh` ejecuta los tres primeros scripts de R en orden, pero actualmente no ejecuta `code/r/4_weather_maps.R`. Se recomienda ejecutar los scripts de R por separado para ahorrar tiempo en caso de errores o de tiempos de ejecución largos debido a la cantidad de datos del NOAA. Si se ejecuta `code/r/4_weather_maps.R` (paso opcional), se guardan mapas en formato PNG en `img/weather_maps/`.
 
 The final product of the code are three `.csv` files with daily temperature and precipitation data for Ecuador. The first file contains maximum temperature data, the second minimum temperature data, and the third precipitation data. The files contain information at the canton level.
 
-The bash script `ecuador-noaa.sh` runs the first three R scripts in order but currently does not run `code/r/4_weather_maps.R`. It is recommended to run the R scripts separately to save time in case of errors or long execution times due to the amount of NOAA data.
+The bash script `ecuador-noaa.sh` runs the first three R scripts in order but currently does not run `code/r/4_weather_maps.R`. It is recommended to run the R scripts separately to save time in case of errors or long execution times due to the amount of NOAA data. If you run `code/r/4_weather_maps.R` (optional step), it saves PNG maps in `img/weather_maps/`.
 
 3. Estructura del Repositorio / Repository Structure
 
@@ -44,6 +44,10 @@ The bash script `ecuador-noaa.sh` runs the first three R scripts in order but cu
     - `data/weather`
         - `processed/`: Contiene los archivos `.csv` con los datos diarios de temperatura y precipitación procesados.
         - `raw/`: Contiene los archivos `.nc` descargados de NOAA.
+
+- `img/`: Carpeta creada al ejecutar (de forma opcional) `code/r/4_weather_maps.R`, que almacena las salidas en PNG dentro de `img/weather_maps/`.
+
+- `img/`: Directory created when optionally running `code/r/4_weather_maps.R`, which stores the PNG outputs under `img/weather_maps/`.
 
 ## Referencias / References
 

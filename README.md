@@ -1,6 +1,6 @@
 # Datos de Temperatura del Ecuador del NOAA
 
-Este repositorio contiene el código necesario para descargar y procesar los datos diarios de temperatura para Ecuador del Physical Sciences Laboratory del [National Oceanic and Atmospheric Administration (NOAA)](https://www.noaa.gov/), una agencia del gobierno de los Estados Unidos. Los datos sin procesar se pueden descargar en un formato NetCDF (`.nc`) [desde aquí](https://psl.noaa.gov/data/gridded/data.cpc.globaltemp.html). El código prepara datos diarios al nivel de cantones y parroquias del país.  
+Este repositorio contiene el código necesario para descargar y procesar los datos diarios de temperatura para Ecuador del Physical Sciences Laboratory del [National Oceanic and Atmospheric Administration (NOAA)](https://www.noaa.gov/), una agencia del gobierno de los Estados Unidos. Los datos sin procesar se pueden descargar en un formato NetCDF (`.nc`) [desde aquí](https://psl.noaa.gov/data/gridded/data.cpc.globaltemp.html). El código prepara datos diarios a nivel de cantón (segundo nivel administrativo por debajo de provincia).
 
 Se utiliza R para procesar los archivos `.nc` y obtener los datos de temperatura diaria, procesando la información geoespacial a un formato rectangular, amigable con sistemas de bases de datos relacionales. El algoritmo de procesamiento se basa en el trabajo de [Quijano-Ruiz (2023)](https://github.com/aquijanoruiz/Weather_HealthPerception).
 
@@ -14,11 +14,15 @@ R is used to process the `.nc` files and obtain daily temperature data, processi
 
 1. [Requisitos / Requirements](#requisitos--requirements)
 
-R y RStudio son necesarios para ejecutar el código. Se recomienda una conexión a internet estable para descargar los archivos `.nc` de NOAA así como un computador con suficiente memoria RAM para procesar los datos (al menos 4GB). 
+## Requisitos / Requirements
+
+R y RStudio son necesarios para ejecutar el código. Se recomienda una conexión a internet estable para descargar los archivos `.nc` de NOAA así como un computador con suficiente memoria RAM para procesar los datos (al menos 4GB).
 
 R and RStudio are required to run the code. A stable internet connection is recommended to download the NOAA `.nc` files as well as a computer with enough RAM to process the data (at least 4GB).
 
 2. [Instrucciones / Instructions](#instrucciones--instructions)
+
+## Instrucciones / Instructions
 
 El producto final del código son tres archivos `.csv` con los datos de temperatura y precipitación diaria para Ecuador. El primer archivo contiene datos de temperatura máxima, el segundo datos de temperatura mínima y el tercero datos de precipitación. Los archivos contienen información a nivel de cantón.
 
@@ -28,7 +32,9 @@ The final product of the code are three `.csv` files with daily temperature and 
 
 The bash script `ecuador-noaa.sh` runs the first three R scripts in order but currently does not run `code/r/4_weather_maps.R`. It is recommended to run the R scripts separately to save time in case of errors or long execution times due to the amount of NOAA data. If you run `code/r/4_weather_maps.R` (optional step), it saves PNG maps in `img/weather_maps/`.
 
-3. Estructura del Repositorio / Repository Structure
+3. [Estructura del Repositorio / Repository Structure](#estructura-del-repositorio--repository-structure)
+
+## Estructura del Repositorio / Repository Structure
 
 -`code/`: Contiene scripts de R y bash para descargar y procesar los datos de temperatura.
     - `code/r/`

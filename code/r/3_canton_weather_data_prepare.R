@@ -38,7 +38,7 @@ canton_shp <-
     st_read("data/shp/ecuador_shapefiles/SHP/nxcantones.shp")  %>% 
     st_simplify(preserveTopology = T, dTolerance = 100) 
 
-# Select the canton identifier and gemoetry (kept by default by the sf class)
+# Select the canton identifier and geometry (kept by default by the sf class)
 
 canton_ids <-
     canton_shp %>% 
@@ -86,7 +86,7 @@ extract_weather_data <- function(x){
 
 # Applying the function to the NetCDF files ------------------------------------
 
-# Getting the path to the the nc files for the minimum temperature, maximum temperature, and precipitation
+# Getting the path to the nc files for the minimum temperature, maximum temperature, and precipitation
 
 min_temperature_files <- list.files("data/weather/raw/tempmin",full.names = T)
 max_temperature_files <- list.files("data/weather/raw/tempmax",full.names = T)

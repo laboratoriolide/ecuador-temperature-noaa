@@ -1,6 +1,6 @@
 # R Script: Weather map creation
 # Laboratorio de Investigación para el Desarrollo del Ecuador 
-# Inputs: 1_weather_data_download.R, 2_shapefiles_download.R, 3_canton_weather_data_prepare.R
+# Inputs: 01_download_weather.R, 02_download_shapefiles.R, 03_process_canton_weather.R
 # Outputs: none
 # Description: This script visualizes weather data in maps for Ecuador. 
 
@@ -28,26 +28,26 @@ library(rnaturalearth, warn.conflicts = T)
 library(rnaturalearthdata, warn.conflicts = T)
 
 # Create output directory for weather maps if it doesn't exist
-if (!dir.exists("img/weather_maps")) dir.create("img/weather_maps", recursive = TRUE)
+if (!dir.exists("output/figures")) dir.create("output/figures", recursive = TRUE)
 
 # Load data -----------------------------------------------------------
 
 # Maximum temperature 
 
-tmax_2023 <- rast("data/weather/raw/tempmax/tmax.2023.nc")
+tmax_2023 <- rast("data/raw/weather/tempmax/tmax.2023.nc")
 
 # Minimum temperature
 
-tmin_2023 <- rast("data/weather/raw/tempmin/tmin.2023.nc")
+tmin_2023 <- rast("data/raw/weather/tempmin/tmin.2023.nc")
 
 # Precipitation
 
-precip_2023 <- rast("data/weather/raw/precip/precip.2023.nc")
+precip_2023 <- rast("data/raw/weather/precip/precip.2023.nc")
 
-# Canton shapefile 
+# Canton shapefile
 
-canton_shp <- 
-    st_read("data/shp/ecuador_shapefiles/SHP/nxcantones.shp")  %>% 
+canton_shp <-
+    st_read("data/raw/shapefiles/ecuador_shapefiles/SHP/nxcantones.shp")  %>%
     st_simplify(preserveTopology = T, dTolerance = 100) %>% 
     rename(prov_id = DPA_PROVIN) %>% 
     filter(!prov_id %in% "20") # Filter out Galápagos Islands since there are no relevant data for these cantons
@@ -94,21 +94,21 @@ layout(matrix(c(1,1,2,2,0,3,3,0),nrow = 2, ncol = 4, byrow = TRUE))
 
 plot(mean_tmax_ecu, main = "Average Maximum Temperature (°C)", axes = T, col = terrain.colors(100), legend = T)
 plot(canton_shp$geometry, add = T)
-dev.copy(png, "img/weather_maps/average_max_temp_ecu.png")
+dev.copy(png, "output/figures/average_max_temp_ecu.png")
 dev.off()
 
 # Minimum temperature
 
 plot(mean_tmin_ecu, main = "Average Minimum Temperature (°C)", axes = T, col = terrain.colors(100), legend = T)
 plot(canton_shp$geometry, add = T)
-dev.copy(png, "img/weather_maps/average_min_temp_ecu.png")
+dev.copy(png, "output/figures/average_min_temp_ecu.png")
 dev.off()
 
 # Precipitation
 
 plot(mean_precip_ecu, main = "Average Precipitation (mm)", axes = T, col = terrain.colors(100), legend = T)
 plot(canton_shp$geometry, add = T)
-dev.copy(png, "img/weather_maps/average_precip_ecu.png")
+dev.copy(png, "output/figures/average_precip_ecu.png")
 dev.off()
 
 # Also can calculate mean values for the whole map (the world) and plot it
@@ -129,6 +129,6 @@ plot(world$geometry, add = T)
 
 # Export the plots
 
-dev.copy(png, "img/weather_maps/average_max_temp_ecu.png")
+dev.copy(png, "output/figures/average_max_temp_ecu.png")
 dev.off()
 

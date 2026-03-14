@@ -3,7 +3,7 @@
 # Description: This script downloads the map shapefiles for Ecuador.
 # Source: INEC (https://www.ecuadorencifras.gob.ec/documentos/web-inec/Geografia_Estadistica/Micrositio_geoportal/index.html)
 # Inputs: None
-# Outputs: Shapefiles for Ecuador @data/shp/ecuador_shapefiles
+# Outputs: Shapefiles for Ecuador @data/raw/shapefiles/ecuador_shapefiles
 
 # Preliminaries ----------------------------------------------------------------
 
@@ -17,26 +17,26 @@ metadata_url <- "https://www.ecuadorencifras.gob.ec//documentos/web-inec/Cartogr
 
 # Download the zip file containing the shapefiles
 
-download.file(shapefile_url, "data/shp/ecuador_shapefiles.zip")
+download.file(shapefile_url, "data/raw/shapefiles/ecuador_shapefiles.zip")
 
 # Download the zip file containing metadata and DPA (División Política Administrativa) metadata
 
-download.file(metadata_url, "data/shp/ecuador_dpa_metadata.zip")
+download.file(metadata_url, "data/raw/shapefiles/ecuador_dpa_metadata.zip")
 
 # Unzip the files --------------------------------------------------------------
 
 # Unzip the shapefiles
 
-unzip("data/shp/ecuador_shapefiles.zip", exdir = "data/shp/ecuador_shapefiles")
+unzip("data/raw/shapefiles/ecuador_shapefiles.zip", exdir = "data/raw/shapefiles/ecuador_shapefiles")
 
 # Unzip the metadata
 
-unzip("data/shp/ecuador_dpa_metadata.zip", exdir = "data/shp/ecuador_dpa_metadata")
+unzip("data/raw/shapefiles/ecuador_dpa_metadata.zip", exdir = "data/raw/shapefiles/ecuador_dpa_metadata")
 
 # Delete unnecessary files ------------------------------------------------------
 
 
-file.remove("data/shp/ecuador_shapefiles.zip")
+file.remove("data/raw/shapefiles/ecuador_shapefiles.zip")
 
-file.remove("data/shp/ecuador_dpa_metadata.zip")
+file.remove("data/raw/shapefiles/ecuador_dpa_metadata.zip")
 

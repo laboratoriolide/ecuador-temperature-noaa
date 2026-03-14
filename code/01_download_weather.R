@@ -2,7 +2,7 @@
 # Laboratorio de Investigación para el Desarrollo del Ecuador 
 # Description: This script downloads NOAA data for Ecuador.
 # Inputs: None
-# Outputs: NetCDF files with temperature and precipitation data @data/weather/raw
+# Outputs: NetCDF files with temperature and precipitation data @data/raw/weather
 
 # Preliminaries ----------------------------------------------------------------
 
@@ -92,11 +92,11 @@ precip_urls <- c(
 
 # File path definition
 
-max_temp_paths <- file.path("data/weather/raw/tempmax", basename(max_temperature_urls))
+max_temp_paths <- file.path("data/raw/weather/tempmax", basename(max_temperature_urls))
 
-min_temp_paths <- file.path("data/weather/raw/tempmin", basename(min_temperature_urls))
+min_temp_paths <- file.path("data/raw/weather/tempmin", basename(min_temperature_urls))
 
-precip_paths <- file.path("data/weather/raw/precip", basename(precip_urls))
+precip_paths <- file.path("data/raw/weather/precip", basename(precip_urls))
 
 # Download the files
 

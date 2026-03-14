@@ -1,8 +1,8 @@
 # R Script: Canton weather data preparation
 # Laboratorio de Investigación para el Desarrollo del Ecuador 
 # Description: This script prepares daily weather data at the canton level for Ecuador.
-# Inputs: 1_weather_data_download.R, 2_shapefiles_download.R
-# Outputs: data/weather/processed/min_temperature.csv, data/weather/processed/max_temperature.csv, data/weather/processed/precipitation.csv
+# Inputs: 01_download_weather.R, 02_download_shapefiles.R
+# Outputs: data/processed/min_temperature.csv, data/processed/max_temperature.csv, data/processed/precipitation.csv
 
 # Preliminaries ----------------------------------------------------------------
 
@@ -34,8 +34,8 @@ library(lubridate)
 
 # Load the Ecuador map shapefile to extract the canton identifiers
 
-canton_shp <- 
-    st_read("data/shp/ecuador_shapefiles/SHP/nxcantones.shp")  %>% 
+canton_shp <-
+    st_read("data/raw/shapefiles/ecuador_shapefiles/SHP/nxcantones.shp")  %>%
     st_simplify(preserveTopology = T, dTolerance = 100) 
 
 # Select the canton identifier and geometry (kept by default by the sf class)
@@ -88,9 +88,9 @@ extract_weather_data <- function(x){
 
 # Getting the path to the nc files for the minimum temperature, maximum temperature, and precipitation
 
-min_temperature_files <- list.files("data/weather/raw/tempmin",full.names = T)
-max_temperature_files <- list.files("data/weather/raw/tempmax",full.names = T)
-precipitation_files <- list.files("data/weather/raw/precip",full.names = T)
+min_temperature_files <- list.files("data/raw/weather/tempmin", full.names = T)
+max_temperature_files <- list.files("data/raw/weather/tempmax", full.names = T)
+precipitation_files <- list.files("data/raw/weather/precip", full.names = T)
 
 # List apply the function to the NetCDF files for the minimum temperature, maximum temperature, and precipitation
 
@@ -110,9 +110,9 @@ precipitation_df <- bind_rows(precipitation_data)
 
 # Export all data to different csv files
 
-write_csv(min_temperature_df, "data/weather/processed/min_temperature.csv")
+write_csv(min_temperature_df, "data/processed/min_temperature.csv")
 
-write_csv(max_temperature_df, "data/weather/processed/max_temperature.csv")
+write_csv(max_temperature_df, "data/processed/max_temperature.csv")
 
-write_csv(precipitation_df, "data/weather/processed/precipitation.csv")
+write_csv(precipitation_df, "data/processed/precipitation.csv")
 

@@ -2,7 +2,6 @@
 .Rproj.user
 .Rhistory
 .Ruserdata
-*.Rproj
 
 # R session artifacts
 .RData
@@ -15,18 +14,12 @@ desktop.ini
 
 # Data: raw files are large and reproducible via download scripts
 data/raw/
-data/shp/ecuador_shapefiles/
-data/shp/ecuador_dpa_metadata/
 
 # Data: processed CSVs are reproducible from raw data
-data/weather/max_temperature.csv
-data/weather/min_temperature.csv
-data/weather/precipitation.csv
-data/weather/processed/
+data/processed/
 
 # Output figures (regenerable)
 output/
-img/
 
 # Temporary / editor files
 *.swp
